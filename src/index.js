@@ -29,11 +29,13 @@ module.exports = ({ types: t }) => {
 
 				let implicitRole, componentNameAttrIndex = null;
 
-				attributes.forEach(function(element, i) {
-					if (element.name.name == componentNameAttr) {
-						implicitRole = element.value.value;
-						componentNameAttrIndex = i;
-						return;
+				attributes.forEach(function(attribute, i) {
+					if (attribute.hasOwnProperty('name') && attribute.name.hasOwnProperty('name') && attribute.name.name == componentNameAttr) {
+						if (attribute.hasOwnProperty('value') && attribute.value.hasOwnProperty('value')) {
+							implicitRole = attribute.value.value;
+							componentNameAttrIndex = i;
+							return;
+						}
 					}
 				}, this);
 
@@ -42,12 +44,16 @@ module.exports = ({ types: t }) => {
 					attributes.splice(componentNameAttrIndex, 1);
 				}
 
+				if (!name.hasOwnProperty('name')) {return}
+
 				// Skip for HTML tags if no role attribute specified
-				if (componentNameAttrIndex == null && htmlTagsArray.indexOf(name.name) !== -1) { return }
+				if (componentNameAttrIndex == null) {
+					if (htmlTagsArray.indexOf(name.name) !== -1) { return };
+				}
 
 				attributes.push(
 					makeAttribute(
-						generateName(path.container.openingElement.name.name, implicitRole),
+						generateName(name.name, implicitRole),
 						state.opts.attributeName
 					)
 				)
