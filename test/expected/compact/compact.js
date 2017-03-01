@@ -1,1 +1,0 @@
-<h1 data-source="compact:1">asd</h1>;

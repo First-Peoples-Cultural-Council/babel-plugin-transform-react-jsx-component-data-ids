@@ -1,15 +1,16 @@
 {
-  "name": "babel-plugin-transform-react-jsx-location",
+  "name": "babel-plugin-transform-react-jsx-component-data-ids",
   "version": "0.1.5",
-  "description": "Adds data- attributes containing source file name and line number",
+  "description": "Adds data attribute to every element with a component name and optional label, to assist with using Shepherd.js.",
   "main": "lib/index.js",
   "scripts": {
+    "transformTest": "npm run prepublish && babel script.js --out-file=script2.js --plugins=syntax-jsx,./lib/index",
     "prepublish": "babel src --out-dir lib",
-    "test": "rm -rf test/out && babel test/in --out-dir test/out && diff -r test/out test/expected"
+    "test": "npm run prepublish && babel test/in.js --out-file=test/out.js --plugins=syntax-jsx,../lib/index && diff -r test/out.js test/expected.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adrianton3/babel-plugin-transform-react-jsx-location.git"
+    "url": "https://github.com/First-Peoples-Cultural-Council/babel-plugin-transform-react-jsx-component-data-ids.git"
   },
   "keywords": [
     "babel",
@@ -20,11 +21,11 @@
     "react",
     "source"
   ],
-  "author": "Adrian Toncean <adrianton3@gmail.com>",
+  "author": "First People's Cultural Council",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.22.2",
+    "babel-cli": "^6.23.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-es2016": "^6.22.0",
