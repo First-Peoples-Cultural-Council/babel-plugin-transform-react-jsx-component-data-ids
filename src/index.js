@@ -39,11 +39,6 @@ module.exports = ({ types: t }) => {
 					}
 				}, this);
 
-				// Remove implicit role attribute
-				if (componentNameAttrIndex != null) {
-					attributes.splice(componentNameAttrIndex, 1);
-				}
-
 				if (!name.hasOwnProperty('name')) {return}
 
 				// Skip for HTML tags if no role attribute specified
@@ -57,6 +52,11 @@ module.exports = ({ types: t }) => {
 						state.opts.attributeName
 					)
 				)
+			},
+			JSXAttribute(path) {
+				if (path.node.name.name === componentNameAttr) {
+				path.remove();
+				}
 			}
 		}
 	}
