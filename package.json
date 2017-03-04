@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-react-jsx-component-data-ids",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "Adds data attribute to every element with a component name and optional label, to assist with using Shepherd.js.",
   "main": "lib/index.js",
   "scripts": {
